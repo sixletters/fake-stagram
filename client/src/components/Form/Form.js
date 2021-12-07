@@ -1,22 +1,36 @@
 import { mergeClasses } from '@material-ui/styles';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useStyles from './styles';
 import {TextField, Button, Typography, Paper} from '@material-ui/core';
 import FileBase from 'react-file-base64';
 import { useDispatch } from 'react-redux';
-import { createPost } from '../../actions/posts';
-
+import { createPost, updatePost } from '../../actions/posts';
+import { useSelector } from 'react-redux';
 
 //functional component use Hooks to preserve and remember states
-const Form = () => {
+const Form = ({currentId, setCurrentId}) => {
     const [postData, setPostData] = useState({
         creator: '',title: '',message: '', tags: '', selectedFile: ''
     });
+    const post = useSelector((state) => currentId? state.posts.find((p) => p._id === currentId):null);
     const classes = useStyles();
     const dispatch = useDispatch();
+    let memoryHeader = ''
+    if(currentId){
+        memoryHeader = "Updating a memory"
+    }else{
+        memoryHeader = "Creating a memory"
+    }
+    useEffect(() => {
+        if(post) setPostData(post)
+    }, [post])
     const handleSubmit= (e) => {
         e.preventDefault()
-        dispatch(createPost(postData))
+        if(currentId){
+            dispatch(updatePost(currentId, postData))
+        }else{
+            dispatch(createPost(postData))
+        }
     }
     const clear = () => {
 
@@ -25,7 +39,7 @@ const Form = () => {
         <Paper className={classes.paper}>
             <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
                 <Typography variant="h6">
-                    Creating a memory
+                    {memoryHeader}
                 </Typography>
                 <TextField 
                     name="creator" 
