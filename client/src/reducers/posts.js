@@ -1,5 +1,7 @@
 export default (posts = [], action) => {
     switch(action.type){
+        case 'DELETE':
+            return posts.filter((post) => action.payload !== post._id)
         case 'FETCH_ALL':
             return action.payload;
         case 'CREATE':
