@@ -1,4 +1,4 @@
-import * as api from '../api';
+import * as api from '../api/posts';
 import {FETCH_ALL,CREATE, UPDATE, DELETE, LIKE} from '../constants/actionTypes'
 
 //action creators
