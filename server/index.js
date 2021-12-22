@@ -5,6 +5,7 @@ import cors from 'cors';
 import postRoutes from './routes/posts.js'
 import dotenv from 'dotenv';
 import userRoutes from './routes/users.js'
+import { notFound } from './middlewares/errorHandlers.js';
 
 const app = express();
 dotenv.config();
@@ -14,6 +15,10 @@ app.use(express.urlencoded({limit: "30mb" , extended: true}));
 app.use(cors());
 app.use('/posts', postRoutes);
 app.use('/users', userRoutes);
+app.use(notFound);
+// app.use(logger);
+// app.use(errorHandler);
+
 app.get('/', (req,res)=> {
     res.send("Hello to Fakestagram API");
 })

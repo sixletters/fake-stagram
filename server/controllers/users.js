@@ -4,7 +4,10 @@ import asyncHandler from 'express-async-handler'
 
 export const registerUser = asyncHandler(async (req, res) => {
     const {userID ,email, password, profilePic} = req.body
-    console.log(req.body)
+    if(userID === email){
+        res.status(400).send("Email and userID cannot be identical");
+        throw new Error('Identical Email and user ID');
+    }
     const userEmailExists = await User.findOne({ email })
     const userIDExists = await User.findOne({ userID })
 
@@ -17,8 +20,8 @@ export const registerUser = asyncHandler(async (req, res) => {
         userID,
         email,
         password,
-        pic,
-    });
+        profilePic,
+    }); 
 
     try{
         await newUser.save()
@@ -31,10 +34,31 @@ export const registerUser = asyncHandler(async (req, res) => {
         })
     }catch(error){
         res.status(400).json({message: error.message})
+        console.log(error.message);
         throw new Error("Error Occured");
     }
 });
 
-export const loginUser = async (req,res) => {
-
-}
+export const loginUser = asyncHandler(async (req,res) => {
+    const {loginID, password} = req.body
+    const userEmail= await User.findOne({email:loginID})
+    const userID = await User.findOne({userID:loginID})
+    if(userEmail && userID){
+        res.status(400).send("Invalid LoginID");
+        throw new Error("Identical Email and loginID");
+    }
+    let user = userEmail;
+    userEmail? user = userEmail: user = userID
+    if(user && (await user.matchPassword(password))){
+        res.json({
+            _id: user._id,
+            email: user.email,
+            userID: user.userID,
+            profilePic: user.profilePic,
+            isAdmin: user.isAdmin,
+        })
+    } else{
+        res.status(400).send("Invalid Password")
+        throw new Error("Invalid password")
+    }
+})
