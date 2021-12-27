@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import User from '../models/userModel.js';
 import asyncHandler from 'express-async-handler'
+import { generateToken } from '../utils/tokenGenerator.js';
 
 export const registerUser = asyncHandler(async (req, res) => {
     const {userID ,email, password, profilePic} = req.body
@@ -31,6 +32,7 @@ export const registerUser = asyncHandler(async (req, res) => {
             userID: newUser.userID,
             profilePic: newUser.profilePic,
             isAdmin: newUser.isAdmin,
+            token: generateToken(newUser._id),
         })
     }catch(error){
         res.status(400).json({message: error.message})
@@ -56,6 +58,7 @@ export const loginUser = asyncHandler(async (req,res) => {
             userID: user.userID,
             profilePic: user.profilePic,
             isAdmin: user.isAdmin,
+            token: generateToken(newUser._id),
         })
     } else{
         res.status(400).send("Invalid Password")
