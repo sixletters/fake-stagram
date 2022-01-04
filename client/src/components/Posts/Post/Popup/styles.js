@@ -2,10 +2,9 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles(theme => ({
   media: {
-    height: 0,
+    height: '50%',
     paddingTop: '56.25%',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    backgroundBlendMode: 'darken',
   },
   border: {
     border: 'solid',
@@ -13,18 +12,10 @@ export default makeStyles(theme => ({
   fullHeightCard: {
     height: '100%',
   },
-  card: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    borderRadius: '15px',
-    height: '100%',
-    position: 'relative',
-  },
   overlay: {
     position: 'absolute',
     top: '20px',
-    left: '20px',
+    left: '40px',
     color: 'white',
   },
   overlay2: {
@@ -54,10 +45,18 @@ export default makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  paper: {
+  card: {
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    outline: 'none',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    borderRadius: '12px',
+    height: '60%',
+    width: '30%',
+    position: 'relative',
+    overflow: 'scroll'
   },  
 }));
