@@ -1,6 +1,11 @@
 # memories
 Fakestagarm project, designed to encapsulate memories 
 
-Author: sh and harris
+This is an extension of Javascript Mastery's Full Stack Mern Project.
+Author: Harris
 
+Landing Page
 ![Current Product](fake-stagram.png)
+
+Post Popup
+![Popup](fake-stagram-popup.png)
