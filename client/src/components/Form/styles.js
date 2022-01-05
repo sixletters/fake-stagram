@@ -8,17 +8,27 @@ export default makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(2),
+    width: '30%' ,
+    border: 'solid 2px rgba(243,92,81, 1)',
+    borderRadius: 10,
+    textAlign: 'center'
   },
   form: {
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'center',
+    flexDirection: 'col'
   },
   fileInput: {
     width: '97%',
     margin: '10px 0',
   },
   buttonSubmit: {
-    marginBottom: 10,
+    width: '300px',
+    height: '50px'
   },
+  buttonClear: {
+    width: '300px',
+    height: '50px'
+  }
 }));

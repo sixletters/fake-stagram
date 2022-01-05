@@ -5,6 +5,7 @@ export default makeStyles(theme => ({
     height: '50%',
     paddingTop: '56.25%',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    marginBottom: '40px'
   },
   border: {
     border: 'solid',
@@ -54,7 +55,7 @@ export default makeStyles(theme => ({
     flexDirection: 'column',
     justifyContent: 'space-between',
     borderRadius: '12px',
-    height: '60%',
+    height: '70%',
     width: '30%',
     position: 'relative',
     overflow: 'scroll'

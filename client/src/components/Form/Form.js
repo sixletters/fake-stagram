@@ -8,7 +8,8 @@ import { createPost, updatePost } from '../../actions/posts';
 import { useSelector } from 'react-redux';
 
 //functional component use Hooks to preserve and remember states
-const Form = ({currentId, setCurrentId}) => {
+const Form = ({currentId, setCurrentId, handleCloseForm}) => {
+
     const [postData, setPostData] = useState({
         creator: '',title: '',message: '', tags: '', selectedFile: ''
     });
@@ -34,7 +35,7 @@ const Form = ({currentId, setCurrentId}) => {
     return (
         <Paper className={classes.paper}>
             <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
-                <Typography variant="h6">
+                <Typography variant="h4">
                     {currentId?'Editing a memory': 'Creating a memory'}
                 </Typography>
                 <TextField 
@@ -76,8 +77,8 @@ const Form = ({currentId, setCurrentId}) => {
                         onDone={({base64}) => setPostData({...postData, selectedFile: base64})}
                     />
                 </div>
-                <Button className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit" fullWidth>Submit</Button> 
-                <Button variant="contained" color="secondary" size="small" onClick={clear} fullWidth>Clear</Button>        
+                <Button className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit" onClick={handleCloseForm} fullWidth>Submit</Button> 
+                <Button className={classes.buttonClear} variant="contained" color="secondary" size="small" onClick={clear} fullWidth>Clear</Button>        
             </form>
         </Paper>
     )

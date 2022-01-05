@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux'
 import { deletePost, likePost } from '../../../actions/posts'
 import Popup from './Popup/Popup';
 
-const Post = ({ post, setCurrentId }) => {
+const Post = ({handleOpenForm, post, setCurrentId }) => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const [isPopup, setPopup] = React.useState(false);
@@ -34,7 +34,7 @@ const Post = ({ post, setCurrentId }) => {
                     <Button style={{ color: 'white' }}
                         className={classes.button}
                         size="small"
-                        onClick={() => setCurrentId(post._id)}>
+                        onClick={() => {handleOpenForm(); setCurrentId(post._id)}}>
                         <MoreHorizIcon fontSize="medium" />
                     </Button>
                 </div>
